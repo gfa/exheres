@@ -4,7 +4,7 @@
 # Copyright 2008 Bernd Steinhauser <berniyh@exherbo.org>
 
 MY_PN=VirtualBox
-MY_REV=42893
+MY_REV=43001
 
 SUMMARY="VirtualBox is a family of powerful x86 virtualization products for enterprise as well as home use."
 DESCRIPTION="
