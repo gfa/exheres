@@ -28,8 +28,18 @@ DEPENDENCIES="
         >=sys-libs/libhx-2.2
         dev-libs/openssl
     run:
-        >=sys-fs/cryptsetup-1.05
-        sys-procces/lsof
+        >=sys-fs/cryptsetup-1.0.5
+        sys-process/lsof
 "
-WORK="${WORKBASE}/${MY_PNV}"
+#WORK="${WORKBASE}/${MY_PNV}"
+
+src_compile() {
+        econf --with-slibdir="/$(get_libdir)" || die "econf failed"
+        emake || die "emake failed"
+}
+
+src_install() {
+        emake DESTDIR="${IMAGE}" install || die "make install failed"
+        dodoc doc/*.txt || die "dodoc failed"
+}
 
