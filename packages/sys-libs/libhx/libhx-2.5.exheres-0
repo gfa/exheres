@@ -1,0 +1,16 @@
+
+
+SUMMARY="libHX is a C library that provides data structures and functions for tasks common in scripting languages"
+HOMEPAGE="http://libhx.sourceforge.net/"
+DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.bz2"
+
+LICENCES="|| ( LGPL-2 LGPL-3 GPL-3 )"
+SLOT="0"
+PLATFORMS=""
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        >=sys-devel/gcc-3.3.5
+"
+
