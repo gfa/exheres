@@ -1,0 +1,90 @@
+# Copyright 2009 gustavo panizzo <gfa@zumbi.com.ar>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'unison-2.27.57.ebuild' from Gentoo, which is:
+#     Copyright 1999-2009 Gentoo Foundation
+
+require alternatives
+
+SUMMARY="Two-way cross-platform file synchronizer"
+HOMEPAGE="http://www.cis.upenn.edu/~bcpierce/unison/"
+DOWNLOADS="http://www.cis.upenn.edu/~bcpierce/unison/download/releases/${PNV}/${PNV}.tar.gz"
+BUGS_TO="gfa@zumbi.com.ar"
+
+
+LICENCES="GPL-2"
+SLOT="2.27"
+PLATFORMS="~x86"
+MYOPTIONS="
+    gtk
+    static
+    threads
+    debug
+"
+DEPENDENCIES="
+    gtk? ( >=dev-ml/lablgtk-2.2 )
+    run:
+        gtk? ( net-misc/x11-ssh-askpass net-misc/gtk2-ssh-askpass )
+    post:
+        gtk? ( media-fonts/font-schumacher-misc )
+
+    build:
+        >=dev-lang/ocaml-3.04
+"
+#    run:
+#        app-admin/eclectic-unison
+#"
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}/${PNV}-as-needed.patch"
+    )
+
+
+src_configure() {
+    local myconf
+
+    if option threads; then
+        myconf="$myconf THREADS=true"
+    fi
+
+    if option static; then
+        myconf="$myconf STATIC=true"
+    fi
+
+    if option debug; then
+        myconf="$myconf DEBUGGING=true"
+    fi
+
+    if option gtk; then
+        myconf="$myconf UISTYLE=gtk2"
+    else
+        myconf="$myconf UISTYLE=text"
+    fi
+
+}
+src_compile () {
+    # Discard cflags as it will try to pass them to ocamlc...
+    emake -j1 $myconf CFLAGS="" || die "error making unsion"
+}
+
+src_test() {
+    emake selftest ||  die "selftest failed"
+}
+
+src_install () {
+    # install manually, since it's just too much
+    # work to force the Makefile to do the right thing.
+    newbin unison unison-${SLOT} || die
+    dodoc BUGS.txt CONTRIB INSTALL NEWS \
+          README ROADMAP.txt TODO.txt || die
+
+# Save a list of what executables & man-pages we're installing
+    cd "${IMAGE}"
+    local unique src target alternatives=()
+    for src in usr/bin/*${PV} usr/share/man/man1/*${PV}.1; do
+        [[ ${src/-${PV}} == ${src} ]] && target=${src/${PV}} || target=${src/-${PV}}
+        unique=${target##*/}
+        [[ ${unique} == *.1 ]] && unique=man_${unique%.1}
+        alternatives+=( ${unique} /${target} ${src##*/} )
+    done
+    alternatives_for ${PN} ${SLOT} "$(ever delete_all "${SLOT}")" "${alternatives[@]}"
+
+}
