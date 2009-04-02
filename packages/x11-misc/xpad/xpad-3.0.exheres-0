@@ -1,0 +1,24 @@
+# Copyright 2009 gustavo panizzo <gfa@zumbi.com.ar>
+# Distributed under the terms of the GNU General Public License v2
+# Based in part upon 'xpad-3.0.ebuild' from Gentoo, which is:
+#     Copyright 1999-2009 Gentoo Foundation
+
+SUMMARY="A GTK+ 2.0 based 'post-it' note system."
+HOMEPAGE="http://mterry.name/xpad"
+DOWNLOADS="http://launchpad.net/${PN}/stable/${PV}/+download/${PNV}.tar.bz2"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+
+    build+run:
+    >=x11-libs/gtk+-2.12
+
+    build:
+    >=dev-util/intltool-0.31
+    dev-util/pkg-config
+    sys-devel/gettext
+    "
