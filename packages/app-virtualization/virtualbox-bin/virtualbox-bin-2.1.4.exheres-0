@@ -1,7 +1,8 @@
 # Copyright 2009 gustavo panizzo <gfa@zumbi.com.ar>
-# bases on previous work by 
-# Copyright 2008 Bernd Steinhauser <berniyh@exherbo.org>
 # Distributed under the terms of the GNU General Public License v2
+# based on previous work by
+# Copyright 2008 Bernd Steinhauser <berniyh@exherbo.org>
+# Copyright 1999-2009 Gentoo Foundation
 
 MY_PN=VirtualBox
 MY_REV=43001
@@ -28,6 +29,7 @@ LICENCES="VirtualBox"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
+    X
     platform:
         amd64
         x86
@@ -35,7 +37,9 @@ MYOPTIONS="
 
 DEPENDENCIES="
     run:
-        dev-libs/glib:2
+        group/vboxusers
+
+        X? ( dev-libs/glib:2
         media-libs/fontconfig
         media-libs/freetype:2
         media-libs/libpng
@@ -53,6 +57,7 @@ DEPENDENCIES="
         x11-libs/libXrender
         x11-libs/libXt
       >=x11-libs/qt-4.3.0:4
+      )
 "
 RESTRICT="strip"
 
@@ -78,7 +83,7 @@ src_prepare() {
 }
 
 src_install() {
-    insinto /etc/vbox
+    insinto ${ROOT}/etc/vbox
     hereins vbox.cfg <<EOF
 # VirtualBox installation directory
 INSTALL_DIR='/opt/${MY_PN}-${PV}'
@@ -86,31 +91,47 @@ INSTALL_DIR='/opt/${MY_PN}-${PV}'
 INSTALL_VER='${PV}'
 EOF
 
-    insinto /usr/share/applications/
+    insinto ${ROOT}/usr/share/applications/
     doins "${WORK}"/apps/VirtualBox.desktop
 
-    insinto /usr/share/pixmaps/
+    insinto ${ROOT}/usr/share/pixmaps/
     doins "${WORK}"/icons/VBox.png
 
     dodoc "${WORK}"/doc/UserManual.pdf
 
-    insinto /usr/src/${PNV}
+    insinto ${ROOT}/usr/src/${PNV}
     doins -r "${WORK}"/src/*
 
-    dodir /opt/${MY_PN}-${PV} /usr/bin
+    dodir ${ROOT}/opt/${MY_PN}-${PV} ${ROOT}/usr/bin
     mv "${WORK}"/opt/* "${IMAGE}"/opt/${MY_PN}-${PV}
     for links in {VBoxHeadless,VBoxManage,VBoxSDL,VBoxVRDP,VirtualBox,vboxwebsrv}; do
-        dosym /opt/${MY_PN}-${PV}/VBox.sh /usr/bin/${links}
+        dosym ${ROOT}/opt/${MY_PN}-${PV}/VBox.sh ${ROOT}/usr/bin/${links}
     done
-    dosym /opt/${MY_PN}-${PV}/rdesktop-vrdp /usr/bin/rdesktop-vrdp
+    dosym ${ROOT}/opt/${MY_PN}-${PV}/rdesktop-vrdp ${ROOT}/usr/bin/rdesktop-vrdp
+
+    doinitd ${WORK}/vboxdrv.sh
+    dosym ${ROOT}/usr/src/${PNV} ${ROOT}/opt/${MY_PN}-${PV}/src
 
 
     # VirtualBox needs to be setuid
-    fperms 4711 /opt/${MY_PN}-${PV}/{VirtualBox,VBoxManage}
+    for file in VirtualBox VBoxManage VBoxHeadless VBoxSVC VBoxXPCOMIPCD VBoxTunctl
+    do
+    fperms 4710 ${ROOT}/opt/${MY_PN}-${PV}/$file
+    fowners root:vboxusers  ${ROOT}/opt/${MY_PN}-${PV}/$file
+    done
+    fowners root:vboxusers  ${ROOT}/opt/${MY_PN}-${PV}/VBox.sh
+    fperms 0750 ${ROOT}/opt/${MY_PN}-${PV}/VBox.sh
+    # to get /etc/init.d/vboxdrv.sh setup working
+    fperms 0755 ${ROOT}/usr/src/${PNV}/vboxdrv/build_in_tmp
+    fperms 0755 ${ROOT}/usr/src/${PNV}/vboxnetflt/build_in_tmp
+    #fperms 0755 ${ROOT}/opt/${MY_PN}-${PV}/src/vboxdrv/build_in_tmp
+    #fperms 0755 ${ROOT}/opt/${MY_PN}-${PV}/src/vboxnetflt/build_in_tmp
+
 }
 
 pkg_postinst() {
     ewarn "This exheres does not build the kernel modules for VirtualBox, you will have to do this"
     ewarn "on your own. The source code has been installed to /usr/src/${PNV}"
+    ewarn "or you can just run ${ROOT}/etc/init.d/vboxdrv.sh setup"
 }
 
