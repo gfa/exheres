@@ -22,7 +22,7 @@ DEPENDENCIES="
         dev-libs/openssl
         >=dev-libs/libxml2-2.6
         >=sys-libs/pam-0.99
-        >=sys-libs/libhx-2.2
+        >=sys-libs/libHX-2.2
     run:
         dev-libs/openssl
         sys-process/lsof
