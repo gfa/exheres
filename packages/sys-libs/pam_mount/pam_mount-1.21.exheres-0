@@ -12,6 +12,7 @@ DOWNLOADS="mirror://sourceforge/pam-mount/${PNV}.tar.bz2"
 LICENCES="|| ( GPL-3 GPL-2 LGPL-2 LGPL-3 )"
 SLOT="0"
 PLATFORMS="~x86"
+BUGS_TO="gfa@zumbi.com.ar"
 
 
 

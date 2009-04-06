@@ -11,6 +11,7 @@ LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~x86"
 MYOPTIONS=""
+BUGS_TO="gfa@zumbi.com.ar"
 
 DEPENDENCIES="
 

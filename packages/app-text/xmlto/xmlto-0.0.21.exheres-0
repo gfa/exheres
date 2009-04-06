@@ -12,6 +12,8 @@ It also performs any necessary post-processing.
 HOMEPAGE="https://fedorahosted.org/${PN} http://cyberelk.net/tim/software/${PN}"
 DOWNLOADS="https://fedorahosted.org/releases/x/m/xmlto/${PNV}.tar.bz2"
 
+BUGS_TO="gfa@zumbi.com.ar"
+
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64 ~ppc64 ~x86"

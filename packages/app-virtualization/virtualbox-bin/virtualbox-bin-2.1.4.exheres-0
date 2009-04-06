@@ -25,6 +25,7 @@ HOMEPAGE="http://www.virtualbox.org/"
 DOWNLOADS="platform:amd64? ( http://download.virtualbox.org/virtualbox/${PV}/${MY_PN}-${PV}-${MY_REV}-Linux_amd64.run )
     platform:x86? ( http://download.virtualbox.org/virtualbox/${PV}/${MY_PN}-${PV}-${MY_REV}-Linux_x86.run )"
 
+BUGS_TO="gfa@zumbi.com.ar"
 LICENCES="VirtualBox"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
