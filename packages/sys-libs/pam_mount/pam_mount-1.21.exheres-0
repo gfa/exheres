@@ -27,7 +27,7 @@ DEPENDENCIES="
         dev-libs/openssl
         sys-process/lsof
         >=sys-fs/cryptsetup-1.0.5
-        >=sys-libs/libhx-2.2
+        >=sys-libs/libHX-2.2
         >=sys-libs/pam-0.99
         >=dev-libs/libxml2-2.6
         sys-libs/zlib
