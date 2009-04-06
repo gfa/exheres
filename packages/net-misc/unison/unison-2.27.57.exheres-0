@@ -75,4 +75,6 @@ src_install () {
     newbin unison unison-${SLOT} || die
     dodoc BUGS.txt CONTRIB INSTALL NEWS \
           README ROADMAP.txt TODO.txt || die
+
+    alternatives_for ${PN} ${SLOT} ${SLOT} /usr/bin/${PN} /usr/bin/unison-${SLOT}
 }
