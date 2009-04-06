@@ -10,11 +10,8 @@ SUMMARY="A fully functional X client library for Python, written in Python"
 HOMEPAGE="http://python-xlib.sourceforge.net/"
 DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.gz"
 BUGS_TO="gfa@zumbi.com.ar"
+NEED_PYTHON>1.5:=
 
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~x86"
-DEPENDENCIES="
-    build+run:
-    >=dev-lang/python-1.5.2
-    "
