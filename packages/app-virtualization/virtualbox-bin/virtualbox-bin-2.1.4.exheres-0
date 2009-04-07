@@ -115,18 +115,14 @@ EOF
 
 
     # VirtualBox needs to be setuid
-    for file in VirtualBox VBoxManage VBoxHeadless VBoxSVC VBoxXPCOMIPCD VBoxTunctl
+    for file in VirtualBox VBoxHeadless VBoxSDL
     do
-    fperms 4710 /opt/${MY_PN}-${PV}/$file
-    fowners root:vboxusers  /opt/${MY_PN}-${PV}/$file
+    fperms 4511 /opt/${MY_PN}-${PV}/$file
     done
     fowners root:vboxusers  /opt/${MY_PN}-${PV}/VBox.sh
-    fperms 0750 /opt/${MY_PN}-${PV}/VBox.sh
     # to get /etc/init.d/vboxdrv.sh setup working
     fperms 0755 ${ROOT}/usr/src/${PNV}/vboxdrv/build_in_tmp
     fperms 0755 ${ROOT}/usr/src/${PNV}/vboxnetflt/build_in_tmp
-    #fperms 0755 ${ROOT}/opt/${MY_PN}-${PV}/src/vboxdrv/build_in_tmp
-    #fperms 0755 ${ROOT}/opt/${MY_PN}-${PV}/src/vboxnetflt/build_in_tmp
 
 }
 
