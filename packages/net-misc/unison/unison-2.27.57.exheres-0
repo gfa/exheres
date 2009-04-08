@@ -15,24 +15,24 @@ LICENCES="GPL-2"
 SLOT="2.27"
 PLATFORMS="~x86"
 MYOPTIONS="
-    gtk
     static
     threads
     debug
 "
-DEPENDENCIES="
-    gtk? ( >=dev-ml/lablgtk-2.2 )
-    run:
-        gtk? ( net-misc/x11-ssh-askpass net-misc/gtk2-ssh-askpass )
-    post:
-        gtk? ( media-fonts/font-schumacher-misc )
+    #we don't have the deps yet
+    #gtk
 
+DEPENDENCIES="
     build:
         >=dev-lang/ocaml-3.04
-"
+        "
+#    gtk? ( >=dev-ml/lablgtk-2.2 )
 #    run:
-#        app-admin/eclectic-unison
-#"
+#        gtk? ( net-misc/x11-ssh-askpass net-misc/gtk2-ssh-askpass )
+#    post:
+#        gtk? ( media-fonts/font-schumacher-misc )
+
+
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}/${PNV}-as-needed.patch"
     )
@@ -53,11 +53,11 @@ src_configure() {
         myconf="$myconf DEBUGGING=true"
     fi
 
-    if option gtk; then
-        myconf="$myconf UISTYLE=gtk2"
-    else
+    #if option gtk; then
+    #    myconf="$myconf UISTYLE=gtk2"
+    #else
         myconf="$myconf UISTYLE=text"
-    fi
+    #fi
 
 }
 src_compile () {
