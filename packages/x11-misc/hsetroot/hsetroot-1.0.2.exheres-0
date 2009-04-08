@@ -23,7 +23,3 @@ DEPENDENCIES="
     x11-libs/libXext
     >=media-libs/imlib2-1.0.6.2003
 "
-#src_install() {
-#	emake install DESTDIR="${IMAGE}" || die
-#	dodoc AUTHORS ChangeLog NEWS README
-#}
