@@ -1,0 +1,31 @@
+
+
+SUMMARY="This is a compressed overlay filesystem for Linux that supports both transparent READ and WRITE operations."
+DESCRIPTION="This is a compressed overlay filesystem for Linux that supports both transparent READ and WRITE operations. In other words it provides transparent compression of your files while storing them on an existing filesystem Since there are no other compressing filesystems right now for Linux I wrote this thing. Thanks to FUSE and using compFUSEd you can add compression to your existing filesystem in under 5 minutes. No need to reformat!
+"
+HOMEPAGE="http://www.biggerbytes.be/"
+DOWNLOADS="http://www.biggerbytes.be/index.php?option=com_remository&Itemid=56&func=download&id=1&chk=685ec7b810bf1a283c506cfdad14fc73&no_html=1 -> CompFused-200721321.tar.gz"
+require multilib
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+    sys-fs/fuse
+    "
+
+WORK="${WORKBASE}/${PN}/Gismo"
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}/${PNV}-exherbo.patch"
+    )
+
+src_install () {
+dodoc FEEDBACK.txt HOWTO.txt README* writer_smarter.html
+dobin cf_main cf_fsinfo cf_inspect
+dolib plugins/*so
+insinto /etc/
+doins compFUSEd.conf
+}

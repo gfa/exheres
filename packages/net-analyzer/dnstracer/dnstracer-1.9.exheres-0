@@ -4,7 +4,6 @@
 # Copyright 1999-2008 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-#inherit flag-o-matic
 
 DESCRIPTION="Determines where a given nameserver gets its information from"
 HOMEPAGE="http://www.mavetju.org/unix/general.php"
@@ -14,14 +13,4 @@ LICENCES="as-is"
 SLOT="0"
 PLATFORMS="~x86"
 
-MYOPTIONS="ipv6"
-
-#src_compile() {
-#	econf $(use_enable ipv6) || die
-#	emake || die
-#}
-
-#src_install() {
-#	make DESTDIR="${D}" install || die
-#	dodoc README CHANGES
-#}
+MYOPTIONS=""

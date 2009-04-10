@@ -1,0 +1,21 @@
+
+
+SUMMARY="cadaver is a command-line WebDAV client for Unix. It supports file upload, download, on-screen display, namespace operations (move/copy), collection creation and deletion, and locking operations."
+HOMEPAGE="http://www.webdav.org/cadaver/"
+DOWNLOADS="http://www.webdav.org/cadaver/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="ssl xml"
+
+DEFAULT_SRC_INSTALL_EXTRA_DOCS="INTEROP"
+
+DEPENDENCIES="
+    build+run:
+    net-misc/neon
+    ssl?
+    ( net-misc/neon[ssl] )
+    xml?
+    ( net-misc/neon[expat] )
+    "

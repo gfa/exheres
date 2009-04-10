@@ -1,0 +1,76 @@
+diff -ur Gismo.orig/Makefile Gismo/Makefile
+--- Gismo.orig/Makefile	2009-04-09 16:22:34.000000000 -0300
++++ Gismo/Makefile	2009-04-09 16:22:43.000000000 -0300
+@@ -11,8 +11,8 @@
+ #
+ USE_ZLIB=1
+ USE_BZIP2=1
+-USE_LZO=1
+-USE_LZO2=1
++USE_LZO=0
++USE_LZO2=0
+ 
+ ifeq ($(USE_LZO),1)
+ 	PLUGINS += cf_lzo.so
+diff -ur Gismo.orig/Rules.make Gismo/Rules.make
+--- Gismo.orig/Rules.make	2009-04-09 16:22:34.000000000 -0300
++++ Gismo/Rules.make	2009-04-09 16:22:58.000000000 -0300
+@@ -2,9 +2,9 @@
+ AR=
+ CFLAGS= -Wall -pedantic -g -D_FILE_OFFSET_BITS=64 
+ 
+-LIBS= -lfuse -lprofiler
++LIBS= -lfuse
+ IDIR=-I.
+-LDIR=-L. -L/home/johan/google-perftools-0.91/.libs/
++LDIR=-L.
+ TARGETS=cf_main cf_fsinfo cf_inspect
+ PLUGINS=
+ #
+diff -ur Gismo.orig/cf_defines.h Gismo/cf_defines.h
+--- Gismo.orig/cf_defines.h	2009-04-09 16:22:34.000000000 -0300
++++ Gismo/cf_defines.h	2009-04-09 16:23:31.000000000 -0300
+@@ -3,7 +3,7 @@
+ 
+ #define _GNU_SOURCE
+ 
+-#define CF_CENTRAL_CONFIG	"/usr/local/etc/compFUSEd.conf"
++#define CF_CENTRAL_CONFIG	"/etc/compFUSEd.conf"
+ #define CF_LOCAL_CONFIG		"/.compFUSEd"
+ 
+ #define	CF_USE_LZO
+diff -ur Gismo.orig/cf_main.c Gismo/cf_main.c
+--- Gismo.orig/cf_main.c	2009-04-09 16:22:34.000000000 -0300
++++ Gismo/cf_main.c	2009-04-09 16:23:41.000000000 -0300
+@@ -1196,7 +1196,7 @@
+ 	map = cf_map_alloc();
+ 
+ 	/* Parse the different configuration files:
+-		- central config /usr/local/etc/compFUSEd.conf
++		- central config /etc/compFUSEd.conf
+ 		- local config $HOME/.compFUSEd
+ 	*/
+ 	cf_config_file_read(config_file);
+diff -ur Gismo.orig/compFUSEd.conf Gismo/compFUSEd.conf
+--- Gismo.orig/compFUSEd.conf	2009-04-09 16:22:34.000000000 -0300
++++ Gismo/compFUSEd.conf	2009-04-09 16:24:11.000000000 -0300
+@@ -3,7 +3,7 @@
+ // One line of comment 	(C++ style)
+ 
+ ;
+-; The global config file is /usr/local/etc/compFUSEd.conf
++; The global config file is /etc/compFUSEd.conf
+ ; The local (as in per user) is .compFUSEd  (NOTE: no .conf)
+ ;
+ ; IMPORTANT: the local config overrides the global one
+@@ -17,8 +17,8 @@
+ ;
+ [/usr/src/]
+ backend = /usr/cf_src
+-compression = /usr/local/lib/cf_lzo2.so
+-writer = /usr/local/lib/writer_smarter.so
++compression = /usr/lib/cf_lzo2.so
++writer = /usr/lib/writer_smarter.so
+ chunk_max = 100
+ chunk_size = 65553
+ exclude = tgz					// Extension of files not to compress

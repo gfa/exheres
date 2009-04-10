@@ -1,0 +1,14 @@
+
+SCM_REPOSITORY="git://github.com/tex/fusecompress.git"
+SUMMARY="FuseCompress (compressed filesystem in userspace)"
+DESCRIPTION="
+"
+HOMEPAGE="http://www.miio.net/fusecompress"
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+

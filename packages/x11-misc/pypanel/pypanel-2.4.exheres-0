@@ -4,6 +4,7 @@
 #     Copyright 1999-2009 Gentoo Foundation
 
 NEED_PYTHON=2.3:=
+require distutils
 
 MY_PN="${PN/pyp/PyP}"
 MY_PNV="${MY_PN}-${PV}"

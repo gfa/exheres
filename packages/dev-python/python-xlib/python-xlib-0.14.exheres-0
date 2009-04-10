@@ -5,6 +5,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 NEED_PYTHON=1.5:=
+require distutils
 
 SUMMARY="A fully functional X client library for Python, written in Python"
 HOMEPAGE="http://python-xlib.sourceforge.net/"

@@ -1,0 +1,44 @@
+
+
+SUMMARY="Cach on already mounted filesystem"
+DESCRIPTION="CacheFiles is a caching backend that's meant to use as a cache a directory on
+an already mounted filesystem of a local type (such as Ext3).
+
+CacheFiles uses a userspace daemon to do some of the cache management - such as
+reaping stale nodes and culling.  This is called cachefilesd and lives in
+/sbin.
+
+The filesystem and data integrity of the cache are only as good as those of the
+filesystem providing the backing services.  Note that CacheFiles does not
+attempt to journal anything since the journalling interfaces of the various
+filesystems are very specific in nature.
+
+CacheFiles creates a proc-file - "/proc/fs/cachefiles" - that is used for
+communication with the daemon.  Only one thing may have this open at once, and
+whilst it is open, a cache is at least partially in existence.  The daemon
+opens this and sends commands down it to control the cache.
+
+CacheFiles is currently limited to a single cache.
+
+CacheFiles attempts to maintain at least a certain percentage of free space on
+the filesystem, shrinking the cache by culling the objects it contains to make
+space if necessary - see the \"Cache Culling\" section.  This means it can be
+placed on the same medium as a live set of data, and will expand to make use of
+spare space and automatically contract when the set of data requires more
+space.
+"
+HOMEPAGE="http://people.redhat.com/~dhowells/fscache/"
+DOWNLOADS="http://people.redhat.com/~dhowells/fscache/${PNV}.tar.bz2"
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+src_install () {
+default
+dodoc howto.txt move-cache.txt
+doinitd cachefilesd.initd
+}

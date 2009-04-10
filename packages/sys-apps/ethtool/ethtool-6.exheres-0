@@ -13,7 +13,3 @@ SLOT="0"
 PLATFORMS="~x86"
 BUGS_TO="gfa@zumbi.com.ar"
 
-#src_install() {
-##	emake install DESTDIR="${D}" || die
-#	dodoc AUTHORS ChangeLog* NEWS README
-#}
