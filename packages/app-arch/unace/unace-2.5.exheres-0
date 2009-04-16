@@ -1,0 +1,25 @@
+# Copyright 2009 gustavo panizzo <gfa@zumbi.com.ar>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN="linunace"
+MY_PNV=${MY_PN}25
+
+SUMMARY=""
+DESCRIPTION="
+"
+HOMEPAGE="http://www.winace.com"
+DOWNLOADS="http://www.winace.com/files/${MY_PNV}.tgz"
+
+LICENCES="as-is"
+SLOT="0"
+PLATFORMS="~x86"
+
+
+WORK=${WORKBASE}
+
+
+
+src_install () {
+dobin unace
+dodoc licence
+}
