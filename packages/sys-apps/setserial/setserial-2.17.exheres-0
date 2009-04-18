@@ -1,0 +1,20 @@
+# Copyright 2009 gustavo panizzo <gfa@zumbi.com.ar>
+# Distributed under the terms of the GNU General Public License v2
+
+
+SUMMARY="Setserial --- serial driver config tool"
+DESCRIPTION="setserial is a program designed to set and/or report the configuration information associated with a serial port. 
+"
+HOMEPAGE="http://setserial.sourceforge.net/"
+DOWNLOADS="http://sourceforge.net/sourceforge/${PN}/${PNV}.tar.gz"
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+
+src_install () {
+dodoc ${WORK}/Documentation/byterunner-setup ${WORK}/{rc.serial,README}
+dobin ${WORK}/setserial
+}
