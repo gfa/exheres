@@ -1,0 +1,16 @@
+
+
+SUMMARY="Advanced open-source framework for developing, testing, and using vulnerability exploit code"
+DESCRIPTION="Metasploit provides useful information to people who perform penetration testing, IDS signature development, and exploit research. This project was created to provide information on exploit techniques and to create a useful resource for exploit developers and security professionals. The tools and information on this site are provided for legal security research and testing purposes only. Metasploit is a community project managed by Metasploit LLC. 
+"
+HOMEPAGE="http://www.metasploit.com/home/"
+DOWNLOADS="http://spool.metasploit.com/releases/framework-${PV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="3"
+PLATFORMS="~x86"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+WORK="${WORKBASE}/framework-${PV}"
