@@ -1,0 +1,49 @@
+
+
+SUMMARY="a minimalistic music player"
+DESCRIPTION="Herrie is a minimalistic music player that uses the command line. It is written to support a variety of operating systems, audio subsystems and file formats, including playlists.
+
+Herrie has a split-screen user interface, with a playlist at the top of the screen and a file browser at the bottom. When tracks are added to the playlist, Herrie consumes them from the top one by one. It is thus an application that allows you to batch music for playback.
+
+Herrie also has some more exotic features, including support for AudioScrobbler and the ability to chroot() itself into a directory.
+
+On the November 29, 2007, Herrie was awarded a 3rd price at Troph?es du Libre in the category Multimedia & Games! Slides of the presentation that has been held in front of the jury have been published online.
+"
+HOMEPAGE="http://herrie.info"
+DOWNLOADS="http://herrie.info/distfiles/${PNV}.tar.bz2 http://www.stack.nl/~ed/projects/herrie/distfiles/${PNV}.tar.bz2"
+
+LICENCES="BSD-2 GPL-2"
+SLOT="0"
+PLATFORMS="~x86"
+MYOPTIONS="modplug nls curl mp3 ogg ncurses pulseaudio sndfile"
+
+DEPENDENCIES="
+    build+run:
+    dev-libs/glib
+    sys-sound/alsa-lib
+    sys-libs/ncurses
+
+    modplug? ( media-libs/libmodplug )
+    nls? ( sys-devel/gettext )
+    curl? ( net-misc/curl )
+    mp3? ( media-libs/libid3tag
+    media-libs/libmad )
+    sndfile? ( media-libs/libsndfile )
+    ogg? ( media-libs/libvorbis )
+    pulseaudio? ( media-sound/pulseaudio )
+    "
+
+
+src_configure() {
+    local myconf
+    option modplug && myconf="modplug ${myconf}" || myconf="no_modplug ${myconf}"
+    option nls || myconf="no_nls ${myconf}"
+    option curl || myconf="no_http ${myconf}"
+    option mp3 || myconf="no_mp3 ${myconf}"
+    option sndfile && myconf="sndfile ${myconf}" || myconf="no_sndfile ${myconf}"
+    option ogg || myconf="no_vorbis ${myconf}"
+    option pulseaudio && myconf="pulse ${myconf}"
+
+    cd ${WORK}
+    ./configure verbose no_xspf alsa ${myconf} || die
+}
