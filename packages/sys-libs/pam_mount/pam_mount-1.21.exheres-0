@@ -19,16 +19,16 @@ BUGS_TO="gfa@zumbi.com.ar"
 DEPENDENCIES="
     build+run:
         dev-libs/openssl
-        >=sys-libs/libHX-2.2
-        >=sys-libs/pam-0.99
-        >=dev-libs/libxml2-2.6
+        >=sys-libs/libHX[>=2.2]
+        >=sys-libs/pam[>=0.99]
+        dev-libs/libxml2[>=2.6]
 
     build:
         dev-util/pkg-config
 
     run:
         sys-process/lsof
-        >=sys-fs/cryptsetup-1.0.5
+        sys-fs/cryptsetup[>=1.0.5]
         sys-libs/zlib
 "
 DEFAULT_SRC_CONFIGURE_PARAMS=(

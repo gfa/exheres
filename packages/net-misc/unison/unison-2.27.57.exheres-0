@@ -24,7 +24,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
-        >=dev-lang/ocaml-3.04
+        dev-lang/ocaml[>=3.04]
         "
 #    gtk? ( >=dev-ml/lablgtk-2.2 )
 #    run:

@@ -15,7 +15,7 @@ BUGS_TO="gfa@zumbi.com.ar"
 
 DEPENDENCIES="
     build:
-        >=sys-devel/gcc-3.3.5
+        sys-devel/gcc[>=3.3.5]
 "
 WORK="${WORKBASE}/libHX-${PV}"
 

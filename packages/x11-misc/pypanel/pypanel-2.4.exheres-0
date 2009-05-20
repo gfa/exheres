@@ -20,8 +20,8 @@ PLATFORMS="~x86"
 
 DEPENDENCIES="
     build+run:
-    >=dev-python/python-xlib-0.12
-    >=media-libs/imlib2-1.1 
+    dev-python/python-xlib[>=0.12]
+    media-libs/imlib2[>=1.1] 
     "
 
 WORK="${WORKBASE}/${MY_PNV}"
