@@ -16,10 +16,10 @@ BUGS_TO="gfa@zumbi.com.ar"
 DEPENDENCIES="
 
     build+run:
-    >=x11-libs/gtk+-2.12
+    x11-libs/gtk+[>=2.12]
 
     build:
-    >=dev-util/intltool-0.31
+    dev-util/intltool[>=0.31]
     dev-util/pkg-config
     sys-devel/gettext
     "

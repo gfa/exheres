@@ -19,8 +19,8 @@ BUGS_TO="gfa@zumbi.com.ar"
 DEPENDENCIES="
     build+run:
         dev-libs/openssl
-        >=sys-libs/libHX[>=2.2]
-        >=sys-libs/pam[>=0.99]
+        sys-libs/libHX[>=2.2]
+        sys-libs/pam[>=0.99]
         dev-libs/libxml2[>=2.6]
 
     build:
